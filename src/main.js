@@ -1,5 +1,7 @@
 `use strict`;
 
+const TASK_COUNT = 3;
+
 const AddedComponentPosition = {
   BEFORE_BEGIN: `beforebegin`,
   AFTER_BEGIN: `afterbegin`,
@@ -379,3 +381,51 @@ const createLoadMoreButtonTemplate = () => {
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
 };
+
+// Отрисовка Меню
+var siteMainElement = document.querySelector(`.main`);
+var siteHeaderElement = siteMainElement.querySelector(`.main__control`);
+render(
+  siteHeaderElement,
+  createSiteMenuTemplate(),
+  AddedComponentPosition.BEFORE_END
+);
+
+// Отрисовка фильтров
+render(
+  siteMainElement,
+  createFilterTemplate(),
+  AddedComponentPosition.BEFORE_END
+);
+
+// Отрисовка раздела обзора дел
+render(
+  siteMainElement,
+  createBoardTemplate(),
+  AddedComponentPosition.BEFORE_END
+);
+
+// Отрисовка формы редактирования дела и трех дел в общем формате
+var boardElement = siteMainElement.querySelector(`.board`);
+var boardTasksElement = boardElement.querySelector(`.board__tasks`);
+
+render(
+  boardTasksElement,
+  createTaskEditTemplate(),
+  AddedComponentPosition.BEFORE_END
+);
+
+for (let i = 0; i < TASK_COUNT; ++i) {
+  render(
+    boardTasksElement,
+    createTaskTemplate(),
+    AddedComponentPosition.BEFORE_END
+  );
+}
+
+// Отрисовка кнопки загрузить больше
+render(
+  boardElement,
+  createLoadMoreButtonTemplate(),
+  AddedComponentPosition.BEFORE_END
+);
