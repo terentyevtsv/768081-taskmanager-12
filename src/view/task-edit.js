@@ -28,12 +28,12 @@ const createTaskEditRepeatingTemplate = (repeating) =>
       ${Object.entries(repeating).map(([day, repeat]) => `<input
         class="visually-hidden card__repeat-day-input"
         type="checkbox"
-        id="repeat-mo-4"
+        id="repeat-${day}"
         name="repeat"
-        value="mo"
+        value="${day}"
         ${repeat ? `checked` : ``}
       />
-      <label class="card__repeat-day" for="repeat-mo-${day}">
+      <label class="card__repeat-day" for="repeat-${day}">
         ${day}
       </label>`).join(``)}
     </div>
